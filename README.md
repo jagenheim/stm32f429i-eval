@@ -1,17 +1,14 @@
-stm32f429i-disc
+stm32f429i-eval
 ===============
 
-_stm32f429i-disc_ contains a basic board support package for the
-[STM32F429I-DISC][] microcontroller board to write firmwares using the Rust
-language. This experimentation board features multiple user programmable LEDs
-a gyroscope, an LCD display with resistive touch layer, 64Mbit of memory and a
-user programmable USB connector.
+_stm32f429i-eval_ contains a basic board support package for the
+[STM32F429I-EVAL][] microcontroller board to write firmwares using the Rust
+language. This experimentation board features a lot of different things.
 It also contains a (non-removable) capable ST-Link V2 debugging interface.
 
-* A computer (macOS and Linux work perfectly, Windows should work but was not tested)
-* A bit of open source software
+[STM32F429I-EVAL]: https://www.st.com/en/evaluation-tools/stm32429i-eval.html
 
-[STM32F429I-DISC]: https://www.st.com/en/evaluation-tools/32f429idiscovery.html
+Most of this board is copied from the discovery board package
 
 License
 -------
