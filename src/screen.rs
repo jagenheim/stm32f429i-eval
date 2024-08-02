@@ -13,8 +13,8 @@ use stm32f4xx_hal::{
 pub const EVAL_SCREEN_CONFIG: DisplayConfig = DisplayConfig {
     active_width: 480,
     active_height: 272,
-    h_back_porch: 13,
-    h_front_porch: 30,
+    h_back_porch: 2,
+    h_front_porch: 2,
     h_sync: 41,
     v_back_porch: 2,
     v_front_porch: 2,

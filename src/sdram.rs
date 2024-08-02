@@ -4,6 +4,10 @@ use stm32f4xx_hal::{
     pac::{self, FMC},
 };
 
+// NOTE! There is a patch for the stm32f4xx-hal crate that implemented a
+// stm32-fmc feature for external SDRAM access. Will need to rewrite this
+// entire thing when that gets merged, as it will be much better than this.
+
 pub struct SdramAddressPins {
     pub a0: alt::A0,
     pub a1: alt::A1,
@@ -268,9 +272,9 @@ pub fn sdram_init(_pins: SdramPins, fmc: &mut FMC) {
     unsafe {
         fmc.sdcr1().write(|w| {
             w.nc()
-                .bits(8) // Number of column address bits
+                .bits(1) // 9 bits
                 .nr()
-                .bits(12) // Number of row address bits
+                .bits(1) // 12 bits
                 .mwid()
                 .bits(1) // 32-bit data bus
                 .nb()
@@ -280,7 +284,7 @@ pub fn sdram_init(_pins: SdramPins, fmc: &mut FMC) {
                 .wp()
                 .clear_bit() // Write protection off
                 .sdclk()
-                .bits(2) // 2x clock divider
+                .bits(2) // 2x HCLK
                 .rburst()
                 .set_bit() // Read burst enabled
                 .rpipe()
@@ -293,7 +297,7 @@ pub fn sdram_init(_pins: SdramPins, fmc: &mut FMC) {
         w.tmrd()
             .set(2) // Load mode register to active
             .txsr()
-            .set(4) // Exit self-refresh time
+            .set(7) // Exit self-refresh time
             .tras()
             .set(4) // Self-refresh time
             .trc()
@@ -317,7 +321,7 @@ pub fn sdram_init(_pins: SdramPins, fmc: &mut FMC) {
     send_sdram_cmd(fmc, 0x04); // Load mode register
 
     // Set refresh rate
-    fmc.sdrtr().write(|w| w.count().set(1386));
+    fmc.sdrtr().write(|w| w.count().set(0x0569));
 }
 
 fn send_sdram_cmd(fmc: &mut pac::FMC, cmd: u8) {

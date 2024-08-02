@@ -139,7 +139,6 @@ fn main() -> ! {
             .ok();
     }
 
-    loop {
-        asm::wfi();
-    }
+    #[allow(clippy::empty_loop)]
+    loop {}
 }
