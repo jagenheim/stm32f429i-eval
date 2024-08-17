@@ -11,4 +11,4 @@ pub use cortex_m_rt::*;
 pub mod led;
 pub mod screen;
 pub mod sdram;
-
+pub mod stmpe811;

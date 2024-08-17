@@ -3,7 +3,6 @@
 
 // This is adapted from the stm32f4xx-hal crate screen example
 
-use cortex_m::asm;
 use cortex_m_rt::entry;
 use defmt_rtt as _;
 use embedded_graphics::{
@@ -101,7 +100,7 @@ fn main() -> ! {
     // let mut backlight = gpioa.pa8.into_push_pull_output();
     // backlight.set_high();
 
-    let mut display = screen::new(perif.LTDC, perif.DMA2D, pins);
+    let mut display = screen::new(perif.LTDC, perif.DMA2D, Some(pins));
     display
         .controller
         .config_layer(Layer::L1, unsafe { &mut FB_LAYER1 }, PixelFormat::RGB565);

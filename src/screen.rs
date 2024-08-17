@@ -31,7 +31,7 @@ pub struct Stm32F4EvalDisplay<T: 'static + SupportedWord> {
 }
 
 impl<T: 'static + SupportedWord> Stm32F4EvalDisplay<T> {
-    pub fn new(ltdc: LTDC, dma2d: DMA2D, pins: LtdcPins) -> Stm32F4EvalDisplay<T> {
+    pub fn new(ltdc: LTDC, dma2d: DMA2D, pins: Option<LtdcPins>) -> Stm32F4EvalDisplay<T> {
         let controller = DisplayController::new(
             ltdc,
             dma2d,
